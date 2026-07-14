@@ -56,14 +56,35 @@ Every project lives under `projects/`:
 ```
 projects/
   YYYY-MM-DD-slug/
-    raw/          ← source footage (drop files here; gitignored)
-    edit/         ← transcripts (.json), EDL (.txt), cut video (tracked)
-    compositions/ ← hyperframes HTML files (tracked)
-    renders/      ← final MP4s (gitignored)
+    raw/                        ← source footage (gitignored)
+    raw-test/                   ← test clips (gitignored)
+    edit/                       ← transcripts, EDL, cut video, fonts
+      clips_preview/            ← low-res segment previews (gitignored)
+      clips_graded/             ← graded segments (gitignored)
+      pip_frames/               ← frame sequences for PiP work (gitignored)
+      verify/                   ← visual QC screenshots (gitignored PNGs, scripts tracked)
+        captions/               ← subtitle rendering, font, position checks
+        grade/                  ← color grade comparisons
+        frames/                 ← frame extractions from cuts/base videos
+        overlays/
+          hook/                 ← hook graphic overlay tests
+          article/              ← article background and PiP tests
+          pip/                  ← picture-in-picture mockups
+          alpha/                ← transparency / alpha channel checks
+        subject/                ← cutout and background-removal checks
+        scripts/                ← .mjs helpers that generate verify assets (tracked)
+    compositions/               ← hyperframes HTML + meta (tracked); renders gitignored
+    renders/                    ← final MP4s (gitignored)
 ```
 
-Create the folder structure when starting a new project. Never write output
+Create the folder structure when starting a new project. The `scripts/new-project.sh`
+helper does this automatically (see Scripts table above). Never write output
 files back into `raw/`.
+
+**verify/ discipline:** every visual decision that required a check gets a PNG in the
+right subfolder before moving on. Name files descriptively (`hook_over_source_v2.png`,
+not `test3.png`). Scripts that generate verify assets live in `verify/scripts/` and are
+tracked in git so they can be re-run.
 
 ## Environment
 
@@ -75,6 +96,7 @@ files back into `raw/`.
 
 | Script | What it does |
 |--------|-------------|
+| `./scripts/new-project.sh <slug>` | Scaffold the full project folder structure (including all `verify/` subfolders) for a new clip. Date-prefixes the slug automatically. |
 | `./scripts/bg-composite.sh <video.mp4> <url-or-image>` | Remove background from video, screenshot a URL (or use a local image), composite subject over it, render 9:16 MP4. Output: `projects/<slug>/renders/composite.mp4`. |
 | `./scripts/article-composite.sh <video.mp4> <url> "<phrase>" [--mode background\|overlay]` | Screenshot a news article with a yellow marker highlight on a specific phrase, then composite your video over it. `background` mode (default): article fills top of frame, you appear below. `overlay` mode: your footage plays full-frame, article slides in as a PiP panel. Output: `projects/<slug>/renders/article-composite.mp4`. |
 | `./scripts/render.py` | Patched render helper — use this instead of `tools/video-use/helpers/render.py`. Uses `ffmpeg-full` for ProRes 4444 alpha support and `format=auto` overlay compositing. After `./setup.sh`, copy: `cp scripts/render.py tools/video-use/helpers/render.py` |

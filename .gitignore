@@ -47,12 +47,18 @@ media/
 tools/
 !tools/video-use/helpers/render.py
 
-# Project raw footage and final renders (large files — keep local)
+# Project raw footage and large generated files (keep local)
 projects/*/raw/
 projects/*/raw-test/
 projects/*/renders/
+projects/*/edit/clips_preview/
+projects/*/edit/clips_graded/
+projects/*/edit/pip_frames/
+projects/*/edit/base*.mp4
+projects/*/edit/base*.webm
+projects/*/edit/base_preview.mp4
 
-# Composition render outputs (binary, large — source HTML is tracked)
+# Composition render outputs (binary — source HTML is tracked)
 projects/*/compositions/*/render*.mp4
 projects/*/compositions/*/render*.webm
 projects/*/compositions/*/render*.mov
@@ -61,14 +67,19 @@ projects/*/compositions/*/base*.mp4
 projects/*/compositions/*/clips_*/
 projects/*/compositions/*/.venv/
 
-# Session artifacts
+# verify/ — PNGs are gitignored (generated); scripts/ is tracked
+projects/*/edit/verify/**/*.png
+projects/*/edit/verify/**/*.jpg
+projects/*/edit/verify/node_modules/
+projects/*/edit/verify/package-lock.json
+
+# Session artifacts (root-level from old flat layout)
 edit/
 transcripts/
 animations/
 clips_graded/
 clips_preview/
 downloads/
-verify/
 preview.mp4
 final.mp4
 base.mp4
