@@ -76,6 +76,7 @@ files back into `raw/`.
 | Script | What it does |
 |--------|-------------|
 | `./scripts/bg-composite.sh <video.mp4> <url-or-image>` | Remove background from video, screenshot a URL (or use a local image), composite subject over it, render 9:16 MP4. Output: `projects/<slug>/renders/composite.mp4`. |
+| `./scripts/article-composite.sh <video.mp4> <url> "<phrase>" [--mode background\|overlay]` | Screenshot a news article with a yellow marker highlight on a specific phrase, then composite your video over it. `background` mode (default): article fills top of frame, you appear below. `overlay` mode: your footage plays full-frame, article slides in as a PiP panel. Output: `projects/<slug>/renders/article-composite.mp4`. |
 | `./scripts/render.py` | Patched render helper — use this instead of `tools/video-use/helpers/render.py`. Uses `ffmpeg-full` for ProRes 4444 alpha support and `format=auto` overlay compositing. After `./setup.sh`, copy: `cp scripts/render.py tools/video-use/helpers/render.py` |
 
 ## What NOT to do
