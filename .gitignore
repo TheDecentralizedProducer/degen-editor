@@ -8,6 +8,8 @@
 __pycache__/
 *.py[cod]
 *$py.class
+*.pyc
+*.pyo
 *.egg
 *.egg-info/
 .eggs/
@@ -37,12 +39,18 @@ package-lock.json
 yarn.lock
 .npm/
 
-# Manim render artifacts (when running skills/manim-video scripts locally)
+# Manim render artifacts
 media/
 *.log
 
-# Session artifacts if someone invokes the skill inside the project dir
-# (normally outputs go to <videos_dir>/edit/ — keep these as a safety net)
+# Vendored tools — setup.sh re-clones and builds these
+tools/
+
+# Project raw footage and final renders (large files — keep local)
+projects/*/raw/
+projects/*/renders/
+
+# Session artifacts
 edit/
 transcripts/
 animations/
