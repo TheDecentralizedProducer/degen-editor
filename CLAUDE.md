@@ -96,6 +96,9 @@ tracked in git so they can be re-run.
 | Script | What it does |
 |--------|-------------|
 | `./scripts/new-project.sh <slug>` | Scaffold the full project folder structure (including all `verify/` subfolders) for a new clip. Date-prefixes the slug automatically. |
+| `node scripts/article-excerpt.js <url> "<phrase>" <output.png>` | Screenshot a tight crop of just the paragraph containing the highlighted phrase — sized for use as a floating overlay panel. |
+| `./scripts/scroll-bg-composite.sh <subject.mp4> <scroll.mp4> [--audio subject\|bg\|both]` | Crop a phone screen-recording to 9:16, loop it as background, composite subject cut-out on top. Scroll video auto-loops if shorter than subject. |
+| `./scripts/headline-stack.sh [--slug] [--hold 1.5] [--stagger 0.5] "H1" "H2" "H3"` | Animate 2–4 headlines staggered in (0.5s each), hold, then fade out in order. Outputs transparent WebM for overlaying, or `--opaque` for standalone. |
 | `./scripts/video-bg-composite.sh <subject.mp4> <background.mp4> [--audio both\|subject\|bg]` | Remove background from subject, composite over a video background. Audio modes: `both` mixes tracks (bg ducked to 30%), `subject` keeps only voice, `bg` keeps only background sound. |
 | `./scripts/voiceover.sh <background.mp4> <voice.mp4> [--audio replace\|mix] [--bg-vol 0.2]` | Lay a talking track over a video. `replace` drops background audio (default); `mix` blends both with bg ducked to `--bg-vol`. No background removal needed. |
 | `./scripts/bg-composite.sh <video.mp4> <url-or-image>` | Remove background from video, screenshot a URL (or use a local image), composite subject over it, render 9:16 MP4. Output: `projects/<slug>/renders/composite.mp4`. |
