@@ -35,6 +35,7 @@ fi
 mkdir -p \
   "$PROJECT/raw" \
   "$PROJECT/raw-test" \
+  "$PROJECT/brief" \
   "$PROJECT/edit/verify/captions" \
   "$PROJECT/edit/verify/grade" \
   "$PROJECT/edit/verify/frames" \
