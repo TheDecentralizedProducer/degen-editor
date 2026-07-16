@@ -40,6 +40,10 @@ Run hyperframes via `bunx hyperframes` or `bun run` inside `tools/hyperframes/`.
 5. **Subtitles burn last.** If subtitles are requested, they are always the
    final step in the ffmpeg filter chain — applied after all cuts and overlays
    are in place. Short chunks (≤6 words per line).
+6. **Mark finals.** When Ian says a render is final and approved, write a
+   marker file: `echo "$(date -u +%Y-%m-%dT%H:%M:%SZ)" > renders/.final`
+   This is the only signal the DPC dashboard uses to surface finished reels.
+   Do not write it until Ian explicitly signs off — draft renders must not appear.
 
 ## Motion graphics (hyperframes)
 
