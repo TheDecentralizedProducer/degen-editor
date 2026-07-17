@@ -1,8 +1,8 @@
 # Brief: Avatar Aang Gets a Theatrical Release Date — Exclusively for Awards Qualification
 
 **Pillar:** P5 — Trend Reaction
-**Source:** Variety ([link](https://variety.com/2026/tv/news/avatar-aang-the-last-airbender-movie-theater-release-1236811011/))
-**Approved:** 2026-07-16T04:28:49.243Z
+**Style:** kristen-pepper
+**Source:** Variety — https://variety.com/2026/tv/news/avatar-aang-the-last-airbender-movie-theater-release-1236811011/
 **Script ID:** p5-avatar-aang-20260716
 
 ## Key facts
@@ -15,15 +15,17 @@
 
 ### 30s
 
-Avatar: The Last Airbender is a streaming film. But Paramount is running it in select theaters in LA and New York for exactly one week — for an awards qualifying run. This is the new distribution reality: theatrical is no longer primarily about box office. It's about satisfying the Academy's eligibility rules for content that's fundamentally built for streaming. Do you think a streaming film should compete in the same Oscar categories as a theatrical release — or should there be separate categories?
-
----
+Here's what's actually fascinating about the Avatar Aang theatrical release. Paramount is running it for one week in LA and New York — not for audiences. For the Academy. A qualifying run so a streaming film stays in the Oscar conversation. And I think this is the most honest version of what the theatrical window has become: a checkbox. Not dead. Just not the event anymore. Do you think streaming films should compete in the same Oscar categories as theatrical releases?
 
 ### 90s
 
-Paramount is releasing 'Avatar Aang: The Last Airbender' in select theaters in Los Angeles and New York for one week — not for box office, but for awards qualification. This is the distribution window conversation playing out in real time, and it's worth understanding what it reveals about why the theatrical business is the way it is. The Academy's current eligibility rules require a qualifying theatrical run in LA and NY for most major categories. Streamers figured out years ago that a one-week limited run satisfies that requirement, even when the film is fundamentally a streaming release with a global audience watching at home. The Avatar IP is the right story to show how extreme this has become. This is one of the largest entertainment franchises in the world — and it's doing a seven-day qualifying run in two markets to stay in the Oscar conversation while its actual audience is on streaming. What that does to theater operators is complicated. Their business model was built on a sequential release structure — audiences came to them first, then to home video, with a meaningful window in between. That window has been systematically compressed for two decades. Awards-qualifying theatrical runs for streaming titles are the clearest version of what the end state looks like: theatrical presence as a check-box, not an event. Not dead. Just no longer the primary release moment for most audiences. Do you think streaming films should compete for the same Oscars as theatrical releases — or is it time for the Academy to separate the categories?
+One of the biggest entertainment franchises in the world is getting a theatrical release in two cities for one week. And the audience isn't going to be there. Paramount is running Avatar: The Last Airbender in select LA and New York theaters for an awards qualifying run — because the Academy's eligibility rules still require it. That's the only reason those theaters are involved. And I find that genuinely interesting to sit with, because it's the theatrical window conversation at its most resolved. For years, studios and theater operators fought over release windows. Streamers pushed to compress them. Theaters fought to protect them. And where we've landed is this: a seven-day run in two markets as a legal checkbox for content whose actual audience is already on streaming. Not dead. Just no longer the first chapter of the story between a film and its audience. As someone building infrastructure for independent filmmakers — I think about this a lot. Because most of how the industry's financing structures, distribution deal terms, and recoupment models are built still assumes theatrical-first. And the audience has structurally moved somewhere else. The Avatar IP is just the clearest version of that gap being visible in public. Do you think streaming films should compete for the same Oscars as theatrical releases — or is it time for the Academy to separate the categories?
 
 ## Recording notes
 
 Drop footage into `raw/` then open Claude Code and say "edit this".
-House rules apply — transcribe first, wait for approval, subtitles burn last.
+
+## Edit style
+
+This is a **kristen-pepper** script. Load `~/dpc-command-center/styles/kristen-pepper.md`
+before proposing cuts — specifically the "Adapted for Ian" section.
