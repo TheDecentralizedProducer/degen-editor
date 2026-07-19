@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>Deadline Headline Card</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body {
+        width: 1080px; height: 1920px;
+        overflow: hidden; background: transparent;
+      }
+      #root {
+        position: relative; width: 1080px; height: 1920px;
+        overflow: hidden; background: transparent;
+      }
+      #card-wrap {
+        position: absolute;
+        left: 30px;
+        top: 280px;
+        width: 1020px;
+      }
+      #card {
+        background: #0a0a0a;
+        border-radius: 14px;
+        overflow: hidden;
+        box-shadow: 0 10px 50px rgba(0,0,0,0.75);
+        padding: 24px 28px 26px;
+        border-top: 5px solid #e31837;
+      }
+      #source-row {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        margin-bottom: 14px;
+      }
+      #source-name {
+        font-family: Georgia, 'Times New Roman', serif;
+        font-weight: 900;
+        font-size: 28px;
+        letter-spacing: 1px;
+        color: #e31837;
+        text-transform: uppercase;
+      }
+      #tag {
+        font-family: Helvetica, Arial, sans-serif;
+        font-size: 16px;
+        font-weight: 700;
+        color: #6b7280;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        border-left: 2px solid #374151;
+        padding-left: 14px;
+      }
+      #headline {
+        font-family: Georgia, 'Times New Roman', serif;
+        font-weight: 700;
+        font-size: 26px;
+        line-height: 1.38;
+        color: #f9fafb;
+      }
+      #headline em {
+        font-style: normal;
+        color: #e31837;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"
+      data-composition-id="deadline-headline"
+      data-start="0"
+      data-duration="6"
+      data-width="1080"
+      data-height="1920">
+
+      <div id="card-wrap" class="clip" data-start="0" data-duration="6" data-track-index="1">
+        <div id="card">
+          <div id="source-row">
+            <span id="source-name">Deadline</span>
+            <span id="tag">Commentary · Feb 2026</span>
+          </div>
+          <div id="headline">
+            How Breaching the <em>45-Day Exclusive Window</em> Will Devastate Movies — And Why Netflix's Commitment To Theatrical Is Misleading
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+
+      gsap.set("#card-wrap", { opacity: 1 });
+      tl.to("#card-wrap", { opacity: 0, duration: 0.1 }, 5.9);
+
+      window.__timelines["deadline-headline"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>

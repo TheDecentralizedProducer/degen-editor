@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>Article Scroll</title>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body {
+        width: 1080px; height: 1920px;
+        overflow: hidden; background: transparent;
+      }
+      #root {
+        position: relative; width: 1080px; height: 1920px;
+        overflow: hidden; background: transparent;
+      }
+
+      /* Phone frame sits in the upper portion */
+      #phone-wrap {
+        position: absolute;
+        left: 60px;
+        top: 90px;
+        width: 960px;
+        height: 780px;
+        background: #fff;
+        border-radius: 24px;
+        overflow: hidden;
+        box-shadow: 0 16px 80px rgba(0,0,0,0.75);
+      }
+
+      /* Browser bar at top */
+      #browser-bar {
+        height: 64px;
+        background: #f3f4f6;
+        border-bottom: 1px solid #e5e7eb;
+        display: flex;
+        align-items: center;
+        padding: 0 20px;
+        gap: 10px;
+        flex-shrink: 0;
+      }
+      .dot { width: 14px; height: 14px; border-radius: 50%; }
+      .dot.r { background: #ef4444; }
+      .dot.y { background: #f59e0b; }
+      .dot.g { background: #22c55e; }
+      #url-bar {
+        flex: 1;
+        background: #fff;
+        border-radius: 8px;
+        padding: 8px 16px;
+        font-family: Helvetica, Arial, sans-serif;
+        font-size: 16px;
+        color: #6b7280;
+        border: 1px solid #e5e7eb;
+      }
+
+      /* Scrolling content area */
+      #scroll-viewport {
+        height: 716px;
+        overflow: hidden;
+        position: relative;
+      }
+
+      #scroll-content {
+        padding: 28px 32px;
+        animation: scrollUp 12s linear forwards;
+        animation-delay: 0.5s;
+      }
+
+      @keyframes scrollUp {
+        0%   { transform: translateY(0); }
+        100% { transform: translateY(-680px); }
+      }
+
+      #source-line {
+        font-family: Helvetica, Arial, sans-serif;
+        font-size: 14px;
+        font-weight: 700;
+        color: #16803c;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        margin-bottom: 12px;
+      }
+
+      #article-headline {
+        font-family: Georgia, serif;
+        font-size: 30px;
+        font-weight: 900;
+        line-height: 1.25;
+        color: #111;
+        margin-bottom: 18px;
+      }
+
+      .article-para {
+        font-family: Georgia, serif;
+        font-size: 20px;
+        line-height: 1.65;
+        color: #1f2937;
+        margin-bottom: 20px;
+      }
+
+      mark {
+        background: #fef08a;
+        border-radius: 3px;
+        padding: 0 2px;
+      }
+
+      .divider {
+        height: 1px;
+        background: #e5e7eb;
+        margin: 16px 0;
+      }
+
+      #deadline-hed {
+        font-family: Georgia, serif;
+        font-size: 24px;
+        font-weight: 900;
+        line-height: 1.3;
+        color: #111;
+        margin-bottom: 14px;
+      }
+
+      #deadline-src {
+        font-family: Helvetica, Arial, sans-serif;
+        font-size: 13px;
+        font-weight: 700;
+        color: #e31837;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"
+      data-composition-id="article-scroll"
+      data-start="0"
+      data-duration="12"
+      data-width="1080"
+      data-height="1920">
+
+      <div id="phone-wrap" class="clip" data-start="0" data-duration="12" data-track-index="1">
+        <div id="browser-bar">
+          <div class="dot r"></div>
+          <div class="dot y"></div>
+          <div class="dot g"></div>
+          <div id="url-bar">variety.com · deadline.com</div>
+        </div>
+
+        <div id="scroll-viewport">
+          <div id="scroll-content">
+            <div id="source-line">Variety · Jul 15, 2026</div>
+            <div id="article-headline">'Avatar Aang: The Last Airbender' to Play in Select Theaters for <mark>Awards Qualifying Run</mark></div>
+            <p class="article-para">For one week, "Avatar Aang: The Last Airbender" will screen in select movie theaters in Los Angeles and New York, Variety has learned exclusively.</p>
+            <p class="article-para">While the film is primarily a streaming release and will have its Paramount+ debut on July 25, it has also been set for an <mark>awards-qualifying theatrical run from July 24 to 30</mark>, with three showtimes per day at the AMC Burbank Town Center 6 in L.A. and the AMC Empire 25 in Manhattan.</p>
+
+            <div class="divider"></div>
+
+            <div id="deadline-src">Deadline · Commentary · Feb 2026</div>
+            <div id="deadline-hed">How Breaching the 45-Day Exclusive Window Will Devastate Movies</div>
+            <p class="article-para">Over the past half-century, the exclusive theatrical window has shrunk from a <mark>six-month standard in the 1980s and 1990s</mark> to 90 days in the post-millennial period. It then settled into the post-pandemic range of <mark>60 to 45 days</mark> for most studio films.</p>
+            <p class="article-para">This is not hyperbole; it is a fact supported by data and disciplined analysis.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

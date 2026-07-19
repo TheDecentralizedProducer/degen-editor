@@ -109,6 +109,7 @@ tracked in git so they can be re-run.
 | `./scripts/article-composite.sh <video.mp4> <url> "<phrase>" [--mode background\|overlay]` | Screenshot a news article with a yellow marker highlight on a specific phrase, then composite your video over it. `background` mode (default): article fills top of frame, you appear below. `overlay` mode: your footage plays full-frame, article slides in as a PiP panel. Output: `projects/<slug>/renders/article-composite.mp4`. |
 | `./scripts/render.py` | Patched render helper — use this instead of `tools/video-use/helpers/render.py`. Uses `ffmpeg-full` for ProRes 4444 alpha support and `format=auto` overlay compositing. After `./setup.sh`, copy: `cp scripts/render.py tools/video-use/helpers/render.py` |
 | `uv run python scripts/pip-composite.py --base <base_cut.mp4> --start <t> --end <t> --bg <image.png> --out <pip_clip.mp4>` | Cut Ian out of a video segment (birefnet-general model) and composite him over an article screenshot or any image background. Output is a ready-to-splice MP4. Splice into final with `-itsoffset` + trim/concat (never overlay+enable). See script header for full splice command. |
+| `uv run python scripts/hook-cover.py --video <pip_clip.mp4> --hook <hook.png> --t <seconds> --out <cover.png>` | Extract a frame from a PiP clip (or any video), composite the hook text PNG over it as a static image. Output is the upload-ready Cover PNG for Instagram/TikTok. No render pass needed. |
 
 ## What NOT to do
 

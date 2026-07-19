@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>Avatar Poster — Slide In</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body {
+        width: 1080px; height: 1920px;
+        overflow: hidden; background: transparent;
+      }
+      #root {
+        position: relative; width: 1080px; height: 1920px;
+        overflow: hidden; background: transparent;
+      }
+      #card-wrap {
+        position: absolute;
+        left: 240px;
+        top: 280px;
+        width: 600px;
+      }
+      #poster-card {
+        width: 600px;
+        border-radius: 18px;
+        overflow: hidden;
+        box-shadow: 0 12px 60px rgba(0,0,0,0.75);
+        position: relative;
+      }
+      #poster-img {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+      /* Source badge pinned bottom-left over image */
+      #source-tag {
+        position: absolute;
+        bottom: 16px;
+        left: 20px;
+        background: rgba(0,0,0,0.72);
+        border-left: 4px solid #0ff;
+        padding: 5px 14px;
+        font-family: Helvetica, Arial, sans-serif;
+        font-weight: 700;
+        font-size: 20px;
+        letter-spacing: 2px;
+        color: #fff;
+        border-radius: 0 6px 6px 0;
+        text-transform: uppercase;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"
+      data-composition-id="avatar-poster-slide"
+      data-start="0"
+      data-duration="5"
+      data-width="1080"
+      data-height="1920">
+
+      <div id="card-wrap" class="clip" data-start="0" data-duration="5" data-track-index="1">
+        <div id="poster-card">
+          <img id="poster-img" src="./avatar-poster.jpg" alt="Avatar Aang: The Last Airbender" />
+          <div id="source-tag">Paramount+</div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+
+      gsap.set("#card-wrap", { opacity: 1 });
+      tl.to("#card-wrap", { opacity: 0, duration: 0.1 }, 4.9);
+
+      window.__timelines["avatar-poster-slide"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>Variety Article Card</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body {
+        width: 1080px; height: 1920px;
+        overflow: hidden; background: transparent;
+      }
+      #root {
+        position: relative; width: 1080px; height: 1920px;
+        overflow: hidden; background: transparent;
+      }
+      #card-wrap {
+        position: absolute;
+        left: 30px;
+        top: 280px;
+        width: 1020px;
+      }
+      #card {
+        background: #fff;
+        border-radius: 14px;
+        overflow: hidden;
+        box-shadow: 0 12px 60px rgba(0,0,0,0.7);
+      }
+      /* Top image */
+      #img-wrap {
+        width: 100%;
+        height: 340px;
+        overflow: hidden;
+        position: relative;
+      }
+      #img-wrap img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center top;
+      }
+      #img-overlay {
+        position: absolute;
+        bottom: 0; left: 0; right: 0;
+        height: 120px;
+        background: linear-gradient(transparent, rgba(0,0,0,0.6));
+      }
+      /* Text section */
+      #text-wrap {
+        padding: 22px 26px 24px;
+        background: #fff;
+      }
+      #breadcrumb {
+        font-family: Helvetica, Arial, sans-serif;
+        font-size: 15px;
+        font-weight: 700;
+        color: #16803c;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+      }
+      #headline {
+        font-family: Georgia, 'Times New Roman', serif;
+        font-size: 28px;
+        font-weight: 700;
+        line-height: 1.35;
+        color: #111;
+        margin-bottom: 14px;
+      }
+      #subhead {
+        font-family: Georgia, 'Times New Roman', serif;
+        font-size: 20px;
+        color: #444;
+        line-height: 1.4;
+        margin-bottom: 16px;
+      }
+      #excerpt {
+        font-family: Georgia, 'Times New Roman', serif;
+        font-size: 19px;
+        line-height: 1.55;
+        color: #222;
+        border-top: 1px solid #e5e7eb;
+        padding-top: 14px;
+      }
+      #excerpt mark {
+        background: #fef08a;
+        color: #111;
+        border-radius: 3px;
+        padding: 0 2px;
+      }
+      #byline {
+        margin-top: 12px;
+        font-family: Helvetica, Arial, sans-serif;
+        font-size: 14px;
+        color: #9ca3af;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"
+      data-composition-id="variety-article-card"
+      data-start="0"
+      data-duration="4"
+      data-width="1080"
+      data-height="1920">
+
+      <div id="card-wrap" class="clip" data-start="0" data-duration="4" data-track-index="1">
+        <div id="card">
+          <div id="img-wrap">
+            <img src="./aang.jpg" alt="Avatar Aang" />
+            <div id="img-overlay"></div>
+          </div>
+          <div id="text-wrap">
+            <div id="breadcrumb">Variety · TV · News · Jul 15, 2026</div>
+            <div id="headline">'Avatar Aang: The Last Airbender' to Play in Select Theaters for <mark>Awards Qualifying Run</mark> (EXCLUSIVE)</div>
+            <div id="excerpt">Set for <mark>awards-qualifying theatrical run from July 24 to 30</mark> at AMC Burbank Town Center 6 in L.A. and the AMC Empire 25 in Manhattan.</div>
+            <div id="byline">By Selome Hailu &amp; Joe Otterson</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+
+      gsap.set("#card-wrap", { opacity: 1 });
+      tl.to("#card-wrap", { opacity: 0, duration: 0.1 }, 3.9);
+
+      window.__timelines["variety-article-card"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>Theatrical Window Timeline</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body {
+        width: 1080px; height: 1920px;
+        overflow: hidden; background: transparent;
+      }
+      #root {
+        position: relative; width: 1080px; height: 1920px;
+        overflow: hidden; background: transparent;
+      }
+      #card-wrap {
+        position: absolute;
+        left: 30px;
+        top: 280px;
+        width: 1020px;
+      }
+      #card {
+        background: rgba(5,5,5,0.92);
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 12px 60px rgba(0,0,0,0.8);
+        padding: 30px 36px 32px;
+        border-left: 5px solid #e31837;
+      }
+      #label {
+        font-family: Helvetica, Arial, sans-serif;
+        font-size: 18px;
+        font-weight: 700;
+        color: #6b7280;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        margin-bottom: 24px;
+      }
+      .step {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        margin-bottom: 18px;
+        opacity: 0;
+      }
+      .step:last-child { margin-bottom: 0; }
+      .era {
+        font-family: Helvetica, Arial, sans-serif;
+        font-size: 17px;
+        font-weight: 600;
+        color: #6b7280;
+        width: 160px;
+        flex-shrink: 0;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+      .days {
+        font-family: Helvetica, Arial, sans-serif;
+        font-weight: 900;
+        font-size: 48px;
+        line-height: 1;
+        color: #e5e7eb;
+        width: 180px;
+        flex-shrink: 0;
+      }
+      .days span {
+        font-size: 22px;
+        font-weight: 600;
+        color: #9ca3af;
+        margin-left: 4px;
+      }
+      .bar-wrap {
+        flex: 1;
+        height: 10px;
+        background: rgba(255,255,255,0.08);
+        border-radius: 5px;
+        overflow: hidden;
+      }
+      .bar {
+        height: 100%;
+        border-radius: 5px;
+        width: 0%;
+        background: #4b5563;
+      }
+      /* Last step — the 7-day punchline — is highlighted */
+      .step.highlight .days { color: #e31837; }
+      .step.highlight .era  { color: #f9fafb; }
+      .step.highlight .bar  { background: #e31837; }
+      #source-tag {
+        margin-top: 22px;
+        font-family: Helvetica, Arial, sans-serif;
+        font-size: 15px;
+        color: #4b5563;
+        font-weight: 600;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        opacity: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"
+      data-composition-id="deadline-window-timeline"
+      data-start="0"
+      data-duration="8"
+      data-width="1080"
+      data-height="1920">
+
+      <div id="card-wrap" class="clip" data-start="0" data-duration="8" data-track-index="1">
+        <div id="card">
+          <div id="label">The theatrical window — then &amp; now</div>
+
+          <div class="step" id="s1">
+            <div class="era">1980s–90s</div>
+            <div class="days">180<span>days</span></div>
+            <div class="bar-wrap"><div class="bar" id="b1"></div></div>
+          </div>
+
+          <div class="step" id="s2">
+            <div class="era">Post-2000</div>
+            <div class="days">90<span>days</span></div>
+            <div class="bar-wrap"><div class="bar" id="b2"></div></div>
+          </div>
+
+          <div class="step" id="s3">
+            <div class="era">Post-pandemic</div>
+            <div class="days">45<span>days</span></div>
+            <div class="bar-wrap"><div class="bar" id="b3"></div></div>
+          </div>
+
+          <div class="step highlight" id="s4">
+            <div class="era">Avatar Aang</div>
+            <div class="days">7<span>days</span></div>
+            <div class="bar-wrap"><div class="bar" id="b4"></div></div>
+          </div>
+
+          <div id="source-tag">Via Deadline · Feb 2026</div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+
+      // Hard cut in — card appears instantly
+      gsap.set("#card-wrap", { opacity: 1 });
+
+      // Rows stagger in with animation
+      const steps = ["#s1","#s2","#s3","#s4"];
+      const bars  = ["#b1","#b2","#b3","#b4"];
+      const widths = ["100%", "50%", "25%", "4%"];
+
+      steps.forEach((s, i) => {
+        const t = 0.2 + i * 0.4;
+        tl.to(s, { opacity: 1, duration: 0.2, ease: "power2.out" }, t);
+        tl.to(bars[i], { width: widths[i], duration: 0.5, ease: "power2.out" }, t + 0.05);
+      });
+
+      tl.to("#source-tag", { opacity: 1, duration: 0.2 }, 2.0);
+
+      // Hard cut out
+      tl.to("#card-wrap", { opacity: 0, duration: 0.1 }, 7.9);
+
+      window.__timelines["deadline-window-timeline"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>

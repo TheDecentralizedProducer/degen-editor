@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>Streaming vs Theatrical</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body {
+        width: 1080px; height: 1920px;
+        overflow: hidden; background: transparent;
+      }
+      #root {
+        position: relative; width: 1080px; height: 1920px;
+        overflow: hidden; background: transparent;
+      }
+      #card-wrap {
+        position: absolute;
+        left: 30px;
+        top: 280px;
+        width: 1020px;
+      }
+      #card {
+        background: rgba(5,5,5,0.93);
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 12px 60px rgba(0,0,0,0.8);
+        padding: 28px 32px 32px;
+      }
+      #label {
+        font-family: Helvetica, Arial, sans-serif;
+        font-size: 17px;
+        font-weight: 700;
+        color: #6b7280;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        margin-bottom: 22px;
+      }
+      .row {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 20px;
+      }
+      .col {
+        flex: 1;
+        opacity: 0;
+      }
+      .col-label {
+        font-family: Helvetica, Arial, sans-serif;
+        font-size: 16px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+      }
+      .col.stream .col-label { color: #22d3ee; }
+      .col.theater .col-label { color: #9ca3af; }
+
+      .big-num {
+        font-family: Helvetica, Arial, sans-serif;
+        font-weight: 900;
+        font-size: 72px;
+        line-height: 1;
+        letter-spacing: -2px;
+      }
+      .col.stream .big-num { color: #22d3ee; }
+      .col.theater .big-num { color: #e5e7eb; }
+
+      .sub {
+        font-family: Helvetica, Arial, sans-serif;
+        font-size: 18px;
+        font-weight: 500;
+        color: #9ca3af;
+        margin-top: 6px;
+        line-height: 1.4;
+      }
+
+      .divider-v {
+        width: 1px;
+        background: rgba(255,255,255,0.12);
+        align-self: stretch;
+        flex-shrink: 0;
+      }
+
+      #verdict {
+        margin-top: 22px;
+        padding-top: 18px;
+        border-top: 1px solid rgba(255,255,255,0.1);
+        font-family: Helvetica, Arial, sans-serif;
+        font-size: 20px;
+        font-weight: 600;
+        color: #f9fafb;
+        line-height: 1.45;
+        opacity: 0;
+      }
+      #verdict em {
+        font-style: normal;
+        color: #22d3ee;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"
+      data-composition-id="streaming-stat"
+      data-start="0"
+      data-duration="9"
+      data-width="1080"
+      data-height="1920">
+
+      <div id="card-wrap" class="clip" data-start="0" data-duration="9" data-track-index="1">
+        <div id="card">
+          <div id="label">Where the audience actually is</div>
+          <div class="row">
+            <div class="col stream" id="c1">
+              <div class="col-label">Streaming</div>
+              <div class="big-num">68M</div>
+              <div class="sub">Paramount+ subscribers<br>waiting for July 25</div>
+            </div>
+            <div class="divider-v"></div>
+            <div class="col theater" id="c2">
+              <div class="col-label">Theatrical</div>
+              <div class="big-num">6</div>
+              <div class="sub">showtimes/day<br>2 cities only</div>
+            </div>
+          </div>
+          <div id="verdict">The qualifying run isn't for <em>audiences</em>. It's for <em>voters</em>.</div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+
+      // Hard cut in
+      gsap.set("#card-wrap", { opacity: 1 });
+
+      // Columns stagger in
+      tl.to("#c1", { opacity: 1, duration: 0.2 }, 0.1);
+      tl.to("#c2", { opacity: 1, duration: 0.2 }, 0.5);
+      tl.to("#verdict", { opacity: 1, duration: 0.25 }, 1.2);
+
+      // Hard cut out
+      tl.to("#card-wrap", { opacity: 0, duration: 0.1 }, 8.9);
+
+      window.__timelines["streaming-stat"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>

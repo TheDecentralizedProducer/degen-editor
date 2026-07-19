@@ -166,6 +166,7 @@ def extract_segment(
     out_path: Path,
     preview: bool = False,
     draft: bool = False,
+    speed: float = 1.0,
 ) -> None:
     """Extract a cut range as its own MP4 with grade + 30ms audio fades baked in.
 
@@ -176,6 +177,8 @@ def extract_segment(
       - final (default): 1080p libx264 fast CRF 20
       - preview:         1080p libx264 medium CRF 22 (evaluable for QC)
       - draft:           720p libx264 ultrafast CRF 28 (cut-point check only)
+
+    speed > 1.0 applies atempo (audio) + setpts (video) to speed up playback.
     """
     out_path.parent.mkdir(parents=True, exist_ok=True)
 
@@ -191,11 +194,22 @@ def extract_segment(
     vf_parts.append(scale)
     if grade_filter:
         vf_parts.append(grade_filter)
+    if speed != 1.0:
+        # setpts compresses the video timeline.  (PTS-STARTPTS) normalizes from
+        # the seek offset so the first output frame starts at PTS=0.
+        # The -t flag is set to out_duration (= source_duration/speed) so ffmpeg
+        # reads exactly the right amount of source before stopping.
+        vf_parts.append(f"setpts=(PTS-STARTPTS)/{speed}")
     vf = ",".join(vf_parts)
 
-    # 30ms audio fades at both edges (Rule 3) — prevent pops
-    fade_out_start = max(0.0, duration - 0.03)
-    af = f"afade=t=in:st=0:d=0.03,afade=t=out:st={fade_out_start:.3f}:d=0.03"
+    # 30ms audio fades at both edges (Rule 3) — prevent pops.
+    # Fade times are in output-stream time (after speed is applied).
+    # asetpts=PTS-STARTPTS normalizes audio timestamps from the seek point
+    # before atempo so the resampler operates on a 0-based timeline.
+    out_duration = duration / speed
+    fade_out_start = max(0.0, out_duration - 0.03)
+    fades = f"afade=t=in:st=0:d=0.03,afade=t=out:st={fade_out_start:.3f}:d=0.03"
+    af = f"asetpts=PTS-STARTPTS,atempo={speed},{fades}" if speed != 1.0 else fades
 
     if draft:
         preset, crf = "ultrafast", "28"
@@ -208,7 +222,7 @@ def extract_segment(
         FFMPEG, "-y",
         "-ss", f"{seg_start:.3f}",
         "-i", str(source),
-        "-t", f"{duration:.3f}",
+        "-t", f"{out_duration:.3f}",
         "-vf", vf,
         "-af", af,
         "-c:v", "libx264", "-preset", preset, "-crf", crf,
@@ -235,6 +249,7 @@ def extract_all_segments(
     """
     resolved = resolve_grade_filter(edl.get("grade"))
     is_auto = resolved == "__AUTO__"
+    speed = float(edl.get("speed", 1.0))
     clips_dir = edit_dir / (
         "clips_draft" if draft else ("clips_preview" if preview else "clips_graded")
     )
@@ -247,6 +262,8 @@ def extract_all_segments(
     print(f"extracting {len(ranges)} segment(s) → {clips_dir.name}/")
     if is_auto:
         print("  (auto-grade per segment: analyzing each range)")
+    if speed != 1.0:
+        print(f"  (speed: {speed}x — applying atempo + setpts to every segment)")
     for i, r in enumerate(ranges):
         src_name = r["source"]
         src_path = resolve_path(sources[src_name], edit_dir)
@@ -264,7 +281,7 @@ def extract_all_segments(
         print(f"  [{i:02d}] {src_name}  {start:7.2f}-{end:7.2f}  ({duration:5.2f}s)  {note}")
         if is_auto:
             print(f"        grade: {seg_filter or '(none)'}")
-        extract_segment(src_path, start, duration, seg_filter, out_path, preview=preview, draft=draft)
+        extract_segment(src_path, start, duration, seg_filter, out_path, preview=preview, draft=draft, speed=speed)
         seg_paths.append(out_path)
 
     return seg_paths

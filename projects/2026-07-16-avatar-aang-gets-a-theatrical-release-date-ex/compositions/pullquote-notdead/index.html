@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>Pull Quote — Not Dead</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body {
+        width: 1080px; height: 1920px;
+        overflow: hidden; background: transparent;
+      }
+      #root {
+        position: relative; width: 1080px; height: 1920px;
+        overflow: hidden; background: transparent;
+      }
+      #wrap {
+        position: absolute;
+        left: 60px;
+        top: 280px;
+        width: 960px;
+      }
+      #card {
+        background: rgba(5,5,5,0.9);
+        border-radius: 18px;
+        padding: 44px 46px 48px;
+        box-shadow: 0 14px 70px rgba(0,0,0,0.8);
+        border-left: 6px solid #22d3ee;
+      }
+      #kicker {
+        font-family: Helvetica, Arial, sans-serif;
+        font-size: 20px;
+        font-weight: 700;
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        color: #6b7280;
+        margin-bottom: 20px;
+        opacity: 0;
+      }
+      #big {
+        font-family: Helvetica, Arial, sans-serif;
+        font-weight: 900;
+        font-size: 92px;
+        line-height: 0.95;
+        letter-spacing: -2px;
+        color: #ffffff;
+        margin-bottom: 22px;
+      }
+      #big .dead {
+        color: #22d3ee;
+        opacity: 0;
+        display: inline-block;
+      }
+      #big .strike {
+        position: relative;
+        opacity: 0;
+        display: inline-block;
+      }
+      #sub {
+        font-family: Georgia, 'Times New Roman', serif;
+        font-size: 38px;
+        line-height: 1.32;
+        color: #e5e7eb;
+        font-style: italic;
+        opacity: 0;
+      }
+      #sub b { color: #fff; font-style: normal; font-weight: 700; }
+    </style>
+  </head>
+  <body>
+    <div id="root"
+      data-composition-id="pullquote-notdead"
+      data-start="0"
+      data-duration="6"
+      data-width="1080"
+      data-height="1920">
+
+      <div id="wrap" class="clip" data-start="0" data-duration="6" data-track-index="1">
+        <div id="card">
+          <div id="kicker">The theatrical window</div>
+          <div id="big"><span class="dead">NOT DEAD.</span></div>
+          <div id="sub">Just no longer the <b>first chapter</b> of the story between a film and its audience.</div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+
+      // Hard cut card in
+      gsap.set("#wrap", { opacity: 1 });
+
+      // Kicker fades in
+      tl.to("#kicker", { opacity: 1, duration: 0.25 }, 0.1);
+
+      // "NOT DEAD." punches in with scale
+      tl.fromTo(".dead",
+        { opacity: 0, scale: 0.8 },
+        { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2)" },
+        0.35
+      );
+
+      // Sub line fades up
+      tl.fromTo("#sub",
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" },
+        0.9
+      );
+
+      // Hard cut out
+      tl.to("#wrap", { opacity: 0, duration: 0.1 }, 5.9);
+
+      window.__timelines["pullquote-notdead"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>
